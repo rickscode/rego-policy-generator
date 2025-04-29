@@ -214,10 +214,10 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # UI
-st.title("🔒 REGO X: Generate REGO Policies")
+st.title("REGO X")
 
 with st.sidebar:
-    st.image("https://openpolicyagent.org/images/opa-logo.svg", width=150)
+    st.image("https://www.openpolicyagent.org/img/logos/integrations/opa-golang.png", width=150)
     selected_model = st.selectbox("Choose a Model", MODEL_OPTIONS)
     st.markdown("---")
     st.write("AI-powered OPA REGO policy generator")
@@ -236,9 +236,9 @@ with col1:
 
 with col2:
     st.markdown("### Examples")
-    st.caption("✅ 'Require MFA for all admin access'")
-    st.caption("✅ 'Block requests from high-risk countries'")
-    st.caption("✅ 'Limit container resources based on team quota'")
+    st.caption("'Require MFA for all admin access'")
+    st.caption("'Block requests from high-risk countries'")
+    st.caption("'Limit container resources based on team quota'")
 
 if st.button("Generate REGO Policy", type="primary"):
     if not user_prompt.strip():
