@@ -2,6 +2,8 @@ import streamlit as st
 import os
 from groq import Groq
 from dotenv import load_dotenv
+import re
+
 
 load_dotenv()
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
@@ -234,11 +236,11 @@ with col1:
         help="Be as specific as possible about conditions and requirements"
     )
 
-with col2:
-    st.markdown("### Examples")
-    st.caption("'Require MFA for all admin access'")
-    st.caption("'Block requests from high-risk countries'")
-    st.caption("'Limit container resources based on team quota'")
+# with col2:
+#     st.markdown("### Examples")
+#     st.caption("'Require MFA for all admin access'")
+#     st.caption("'Block requests from high-risk countries'")
+#     st.caption("'Limit container resources based on team quota'")
 
 if st.button("Generate REGO Policy", type="primary"):
     if not user_prompt.strip():
@@ -261,7 +263,7 @@ Follow these guidelines:
 4. Include all necessary conditions
 5. Format for readability
 
-Only output the REGO code block. No explanation, no extra text.
+Only output the REGO code block. No explanation, no extra text and diplsaying your thinking.
 
 Policy Description:
 \"\"\"
@@ -278,6 +280,8 @@ Policy Description:
                 temperature=0.2
             )
             output = chat_completion.choices[0].message.content.strip()
+            output = re.sub(r'<think>.*?</think>', '', output, flags=re.DOTALL).strip()
+
 
         st.subheader("Generated REGO Policy:")
         
